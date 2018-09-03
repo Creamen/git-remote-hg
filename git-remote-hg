@@ -463,6 +463,11 @@ def mark_to_rev(mark):
 # Get a range of revisions in the form of a..b (git committish)
 def gitrange(repo, a, b):
     positive = []
+
+    if hasattr(a, 'rev'):
+        a = a.rev()
+        b = b.rev()
+ 
     pending = set([int(b)])
     negative = set([int(a)])
     for cur in xrange(b, -1, -1):
